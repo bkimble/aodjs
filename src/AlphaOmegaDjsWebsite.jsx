@@ -1,16 +1,45 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Phone, Mail, MapPin, Music2, Heart, Image as ImageIcon, ChevronRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 const gold = "#D4AF37";
 const softGold = "#E7C96B";
 const bg = "#060606";
 const panel = "#0E0E0E";
 const border = "rgba(212,175,55,0.25)";
+
+function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+function Card({ className = "", style, children }) {
+  return (
+    <div className={cn("rounded-xl", className)} style={style}>
+      {children}
+    </div>
+  );
+}
+
+function CardContent({ className = "", children }) {
+  return <div className={className}>{children}</div>;
+}
+
+function Button({ className = "", variant, type = "button", children, ...props }) {
+  const variantClass = variant === "ghost" ? "bg-transparent" : "";
+  return (
+    <button type={type} className={cn("inline-flex items-center justify-center", variantClass, className)} {...props}>
+      {children}
+    </button>
+  );
+}
+
+function Input({ className = "", ...props }) {
+  return <input className={cn("w-full px-4", className)} {...props} />;
+}
+
+function Textarea({ className = "", ...props }) {
+  return <textarea className={cn("w-full px-4 py-3", className)} {...props} />;
+}
 
 const navItems = [
   { id: "home", label: "Home" },
