@@ -25,5 +25,3 @@ Build output is generated in `dist/`.
 4. Push to `main` to trigger deployment.
 
 The included workflow file (`.github/workflows/deploy-pages.yml`) publishes the static `dist/` output automatically.
-
-
