@@ -22,7 +22,7 @@ Build output is generated in `dist/`.
 1. Push this repo to GitHub.
 2. In GitHub, open **Settings > Pages**.
 3. Set **Build and deployment** source to **GitHub Actions**.
-4. Push to `master` to trigger deployment.
+4. Push to `main` to trigger deployment.
 
 The included workflow file (`.github/workflows/deploy-pages.yml`) publishes the static `dist/` output automatically.
 
@@ -32,5 +32,5 @@ If you see `Failed to load module script` with `text/jsx`, GitHub Pages is servi
 
 - Verify **Settings > Pages > Source** is set to **GitHub Actions**
 - Check the latest deploy workflow passed
-- Confirm deployed page source references `assets/index-*.js` (not `/src/master.jsx`)
+- Confirm deployed page source references `assets/index-*.js` (not `/src/main.jsx`)
 - Purge CDN cache or hard refresh if you use a proxy/CDN in front of Pages

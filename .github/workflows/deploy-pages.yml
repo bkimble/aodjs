@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -41,8 +41,8 @@ jobs:
           if not index.exists():
               raise SystemExit("dist/index.html was not generated")
           html = index.read_text(encoding="utf-8")
-          if "/src/master.jsx" in html:
-              raise SystemExit("Build output still references /src/master.jsx")
+          if "/src/main.jsx" in html:
+              raise SystemExit("Build output still references /src/main.jsx")
           if "/assets/" not in html and "./assets/" not in html:
               raise SystemExit("Build output missing compiled assets reference")
           print("Build output verified: compiled assets detected.")
