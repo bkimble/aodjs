@@ -15,7 +15,7 @@ const navItems = [
 ];
 
 const galleryPlaceholders = [
-  "Grand ballroom wedding reception",
+  "Grand ballroom wedding reception!!",
   "Elegant outdoor ceremony setup",
   "Prom night dance floor lighting",
   "School function with premium DJ setup",
@@ -74,72 +74,25 @@ function SectionHeader({ eyebrow, title, text }) {
   );
 }
 
-const LOGO_EQ_HEIGHTS = [10, 16, 8, 20, 12, 28, 14, 22, 42, 70, 42, 22, 14, 28, 12, 20, 8, 16, 10];
+/** Raster logo (1024×683) from `public/` — respects Vite `base` for GitHub Pages. */
+function logoAssetUrl() {
+  const base = import.meta.env.BASE_URL;
+  const path = "alpha-omega-djs-logo.png";
+  return base.endsWith("/") ? `${base}${path}` : `${base}/${path}`;
+}
 
-/** Hero mark: paired arcs + center line + equalizer — SVG with integer snapping + split shape-rendering for sharp rasterization. */
 function LogoMark() {
-  const midY = 82;
-  const barW = 3;
-  const gap = 4;
-  const eqTotalW = LOGO_EQ_HEIGHTS.length * barW + (LOGO_EQ_HEIGHTS.length - 1) * gap;
-  const eqStartX = Math.round(280 - eqTotalW / 2);
-
   return (
-    <div className="flex flex-col items-center justify-center text-center gap-5 [transform:translateZ(0)] [backface-visibility:hidden]">
-      <svg
-        className="w-full max-w-[560px] h-auto block"
-        viewBox="0 0 560 150"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient id="logo-center-line" x1="0" y1="0" x2="560" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#f8e5a0" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#f8e5a0" stopOpacity="1" />
-            <stop offset="1" stopColor="#f8e5a0" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="logo-bar-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#fff0b8" />
-            <stop offset="0.5" stopColor="#f3d36a" />
-            <stop offset="1" stopColor="#b98a12" />
-          </linearGradient>
-        </defs>
-
-        <g shapeRendering="geometricPrecision" stroke={gold} strokeWidth="14" strokeLinecap="round" strokeLinejoin="round">
-          <path transform="rotate(-18 142 82)" d="M 142 24 Q 48 82 142 140" />
-          <path transform="rotate(18 418 82)" d="M 418 24 Q 512 82 418 140" />
-        </g>
-
-        {/* 1px stroke on half-pixel Y keeps the horizontal rule sharp when rasterized */}
-        <line
-          x1="168"
-          y1={midY + 0.5}
-          x2="392"
-          y2={midY + 0.5}
-          stroke="url(#logo-center-line)"
-          strokeWidth="1"
-          shapeRendering="geometricPrecision"
-        />
-
-        <g shapeRendering="crispEdges">
-          {LOGO_EQ_HEIGHTS.map((h, i) => {
-            const x = Math.round(eqStartX + i * (barW + gap));
-            const y = Math.round(midY - h / 2);
-            const hh = Math.round(h);
-            return (
-              <rect key={i} x={x} y={y} width={barW} height={hh} rx={1} fill="url(#logo-bar-fill)" />
-            );
-          })}
-        </g>
-      </svg>
-
-      <div className="space-y-2">
-        <h1 className="text-4xl md:text-6xl tracking-[0.18em] font-serif uppercase antialiased" style={{ color: "#f3dd95" }}>
-          Alpha &amp; Omega DJs
-        </h1>
-        <div className="mx-auto h-px w-40 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
-      </div>
+    <div className="flex flex-col items-center justify-center text-center [transform:translateZ(0)]">
+      <img
+        src={logoAssetUrl()}
+        alt="Alpha &amp; Omega DJs logo"
+        className="w-full max-w-[min(100%,28rem)] sm:max-w-[32rem] h-auto object-contain select-none"
+        width={1024}
+        height={683}
+        decoding="async"
+        fetchPriority="high"
+      />
     </div>
   );
 }
