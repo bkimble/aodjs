@@ -10,7 +10,7 @@ const border = "rgba(212,175,55,0.25)";
 const navItems = [
   { id: "home", label: "Home" },
   { id: "about", label: "About Us" },
-  { id: "images", label: "Images" },
+  // Images page is hidden for now; keep route/component for later.
   { id: "contact", label: "Contact" },
 ];
 
@@ -122,9 +122,6 @@ function HomePage({ setPage }) {
                   Inquire Now
                   <ChevronRight className="ml-2" size={18} />
                 </Button>
-                <Button onClick={() => setPage("images")} variant="ghost" className="rounded-2xl px-7 py-6 text-base border text-zinc-100 hover:bg-white/5" style={{ borderColor: border }}>
-                  View Gallery
-                </Button>
               </div>
             </motion.div>
             <motion.div
@@ -231,17 +228,41 @@ function ImagesPage() {
 }
 
 function ContactPage() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name") || "";
+    const email = formData.get("email") || "";
+    const message = formData.get("message") || "";
+
+    const subject = encodeURIComponent("New inquiry from Alpha & Omega DJs website");
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
+    );
+
+    window.location.href = `mailto:basslines@gmail.com?subject=${subject}&body=${body}`;
+  }
+
   return (
     <section className="py-20 md:py-24">
       <PageContainer>
-        <SectionHeader eyebrow="Contact" title="A refined inquiry page." text="Replace with your real contact details and booking workflow." />
+        <SectionHeader
+          eyebrow="Contact"
+          title="A refined inquiry page."
+          text="Use the form below to share your event details. Your message will be sent directly to our inbox."
+        />
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
           <Card className="rounded-[2rem] border bg-[#0b0b0b]" style={{ borderColor: border }}>
             <CardContent className="p-8 md:p-10 space-y-8">
               {[
-                { icon: <Mail size={18} />, label: "Email", value: "you@example.com" },
-                { icon: <Phone size={18} />, label: "Phone", value: "(000) 000-0000" },
-                { icon: <MapPin size={18} />, label: "Service Area", value: "Add your city, region, or destination coverage" },
+                { icon: <Mail size={18} />, label: "Email", value: "basslines@gmail.com" },
+                { icon: <Phone size={18} />, label: "Phone", value: "504-450-3281" },
+                {
+                  icon: <MapPin size={18} />,
+                  label: "Service Area",
+                  value: "Central Texas (Dallas, Houston, Austin, San Antonio)",
+                },
               ].map((item) => (
                 <div key={item.label} className="flex gap-4 items-start">
                   <div className="w-10 h-10 rounded-2xl border flex items-center justify-center mt-1" style={{ borderColor: border, color: gold }}>
@@ -259,13 +280,32 @@ function ContactPage() {
           </Card>
           <Card className="rounded-[2rem] border bg-gradient-to-b from-[#111] to-[#0a0a0a]" style={{ borderColor: border }}>
             <CardContent className="p-8 md:p-10">
-              <form className="grid gap-5">
+              <form className="grid gap-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input placeholder="Your Name" className="h-12 rounded-2xl border bg-black/20 text-white placeholder:text-zinc-500" style={{ borderColor: border }} />
-                  <Input placeholder="Email Address" className="h-12 rounded-2xl border bg-black/20 text-white placeholder:text-zinc-500" style={{ borderColor: border }} />
+                  <Input
+                    name="name"
+                    placeholder="Your Name"
+                    className="h-12 rounded-2xl border bg-black/20 text-white placeholder:text-zinc-500"
+                    style={{ borderColor: border }}
+                    required
+                  />
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    className="h-12 rounded-2xl border bg-black/20 text-white placeholder:text-zinc-500"
+                    style={{ borderColor: border }}
+                    required
+                  />
                 </div>
-                <Textarea placeholder="Tell us about your event vision..." className="min-h-[180px] rounded-[1.5rem] border bg-black/20 text-white placeholder:text-zinc-500" style={{ borderColor: border }} />
-                <Button type="button" className="rounded-2xl h-12 bg-transparent border hover:bg-white/5 text-base" style={{ borderColor: gold, color: "#f6e3a6" }}>
+                <Textarea
+                  name="message"
+                  placeholder="Tell us about your event vision..."
+                  className="min-h-[180px] rounded-[1.5rem] border bg-black/20 text-white placeholder:text-zinc-500"
+                  style={{ borderColor: border }}
+                  required
+                />
+                <Button type="submit" className="rounded-2xl h-12 bg-transparent border hover:bg-white/5 text-base" style={{ borderColor: gold, color: "#f6e3a6" }}>
                   Send Inquiry
                 </Button>
               </form>
