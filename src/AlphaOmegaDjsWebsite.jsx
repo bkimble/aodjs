@@ -83,7 +83,7 @@ function logoAssetUrl() {
 
 function LogoMark() {
   return (
-    <div className="flex flex-col items-center justify-center text-center [transform:translateZ(0)]">
+    <div className="flex flex-col items-center justify-center text-center gap-2 [transform:translateZ(0)]">
       <img
         src={logoAssetUrl()}
         alt="Alpha &amp; Omega DJs logo"
@@ -133,7 +133,7 @@ function HomePage({ setPage }) {
               transition={{ duration: 0.8 }}
               className="flex justify-center lg:justify-end"
             >
-              <Card className="w-full max-w-2xl rounded-[2rem] border p-8 md:p-10 bg-gradient-to-b from-[#121212] to-[#090909] shadow-[0_0_50px_rgba(212,175,55,0.08)]" style={{ borderColor: border }}>
+              <Card className="w-full max-w-xl rounded-[1.5rem] border p-4 md:p-5 bg-gradient-to-b from-[#121212] to-[#090909] shadow-[0_0_40px_rgba(212,175,55,0.08)]" style={{ borderColor: border }}>
                 <CardContent>
                   <LogoMark />
                 </CardContent>
@@ -148,13 +148,55 @@ function HomePage({ setPage }) {
 
 function AboutPage() {
   return (
-    <section className="py-20 md:py-24">
+    <section className="py-20 md:py-24 border-y" style={{ borderColor: border }}>
       <PageContainer>
-        <SectionHeader
-          eyebrow="About Us"
-          title="Built for couples first and every unforgettable celebration."
-          text="Replace this sample copy with your story, specialties, venues, and team details."
-        />
+        <div className="max-w-3xl space-y-10">
+          <div className="space-y-3">
+            <div className="uppercase tracking-[0.35em] text-xs" style={{ color: gold }}>
+              Alpha &amp; Omega DJs
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif" style={{ color: "#f5e7b0" }}>
+              Why Clients Choose Us
+            </h2>
+            <p className="text-sm md:text-base leading-7 text-zinc-300">
+              Wedding-focused entertainment with the flexibility for every kind of celebration. This page reflects the live site at
+              aodjs.com: it positions weddings as the primary focus while also highlighting prom nights, school functions, birthday
+              parties, and private events.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="text-sm font-semibold tracking-[0.18em] uppercase" style={{ color: softGold }}>
+                Curated Music Design
+              </div>
+              <p className="text-sm md:text-base leading-7 text-zinc-300">
+                From wedding receptions to prom nights and birthday parties, every playlist is tailored to the crowd, the moment,
+                and the tone of the event.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-sm font-semibold tracking-[0.18em] uppercase" style={{ color: softGold }}>
+                Event-Ready Energy
+              </div>
+              <p className="text-sm md:text-base leading-7 text-zinc-300">
+                A polished approach that reads the room, respects your vision, and keeps the energy high for weddings, school
+                functions, and private celebrations without feeling overdone.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-sm font-semibold tracking-[0.18em] uppercase" style={{ color: softGold }}>
+                Luxury Presentation
+              </div>
+              <p className="text-sm md:text-base leading-7 text-zinc-300">
+                Sophisticated black-and-gold branding, elegant booth styling, and refined communication that elevates weddings and
+                any upscale event alike.
+              </p>
+            </div>
+          </div>
+        </div>
       </PageContainer>
     </section>
   );
